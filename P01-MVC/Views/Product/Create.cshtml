@@ -4,24 +4,30 @@
 
 <div class="container col-md-6">
     <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-banger"></div>
         <div class="mb-3">
-            <label for="exampleInputEmail1">ID</label>
+
+            <label asp-for="id" for="exampleInputEmail1">ID</label>
             <input asp-for="id" type="number" class="form-control">
+            <span asp-validation-for="id" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label for="exampleInputEmail1">Name</label>
+            <label asp-for="name" for="exampleInputEmail1">Name</label>
             <input asp-for="name" class="form-control">
+            <span asp-validation-for="name" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label for="exampleInputEmail1">Price</label>
+            <label asp-for="price" for="exampleInputEmail1">Price</label>
             <input asp-for="price" type="number" class="form-control">
+            <span asp-validation-for="price" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label for="exampleInputEmail1">Amount</label>
+            <label asp-for="amout" for="exampleInputEmail1">Amount</label>
             <input asp-for="amout" type="number" class="form-control">
+            <span asp-validation-for="amout" class="text-danger"></span>
         </div>
 
         <div>
@@ -31,4 +37,8 @@
     </form>
 </div>
 
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

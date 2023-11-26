@@ -1,3 +1,6 @@
+global using P01_MVC.Models;
+using P01_MVC.Models.IServiec;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,3 +33,14 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+//global using P01_MvcConcept.Models;
+//using P01_MvcConcept.IService; //อะไรใช้บ่อย (using) มาใส่ global(เรียกใชเได้ทั้งหมด) ใน Program
+
+
+//var builder = WebApplication.CreateBuilder(args);
+
+//// Add services to the container.= ลงทะเบียน
+//builder.Services.AddControllersWithViews();
+////Dependency injection
+//builder.Services.AddSingleton<IProductService, ProductService>();  // = การ new ใช้ได้ทุกที่

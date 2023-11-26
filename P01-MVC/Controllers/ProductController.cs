@@ -6,9 +6,15 @@ namespace P01_MVC.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly IProductServiec ps;
+        // เรียกใช้ DI
+        public ProductController(IProductServiec ps) 
+        {
+            this.ps = ps;
+        }
+
         public IActionResult Index()
         {
-            var ps = new ProductServiec();
             ps.GenerateProduct(20);
             return View(ps.GenerateProductAll());
         }
@@ -22,7 +28,13 @@ namespace P01_MVC.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            return View();
+            if (!ModelState.IsValid) { return View(); }
+            var result = ps.SearchProduct(product.id);
+            if (result == null)
+            {
+                ps.AddProduct(product);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
