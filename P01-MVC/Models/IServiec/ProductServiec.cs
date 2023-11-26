@@ -33,5 +33,15 @@ namespace P01_MVC.Models.IServiec
             ps.GenerateProduct();
             return ProductList;
         }
+
+        public Product SearchProduct(int Id)
+        {
+            return ProductList.Find(x => x.id== Id);
+        }
+
+        public void AddProduct(Product product)
+        {
+            ProductList.Add(product);
+        }
     }
 }

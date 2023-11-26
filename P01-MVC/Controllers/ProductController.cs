@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using P01_MVC.Models;
 using P01_MVC.Models.IServiec;
 
 namespace P01_MVC.Controllers
@@ -13,6 +14,13 @@ namespace P01_MVC.Controllers
         }
 
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        //ปลายทาง
+        [HttpPost]
+        public IActionResult Create(Product product)
         {
             return View();
         }

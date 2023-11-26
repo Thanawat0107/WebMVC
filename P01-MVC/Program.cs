@@ -1,8 +1,13 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container. = ลงทะเบียน
 builder.Services.AddControllersWithViews();
 
+//Dependemcy injectio
+builder.Services.AddSingleton<IProductServices,ProductServices>();
+
+//Midie Ware = ยาม
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

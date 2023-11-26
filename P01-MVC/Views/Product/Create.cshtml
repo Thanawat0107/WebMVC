@@ -1,23 +1,29 @@
-﻿<p>Create Page</p>
+﻿@model Product
+
+<p>Create Page</p>
 
 <div class="container col-md-6">
-    <form>
+    <form asp-action="Create">
         <div class="mb-3">
             <label for="exampleInputEmail1">ID</label>
-            <input type="number" class="form-control">
-        </div>    
+            <input asp-for="id" type="number" class="form-control">
+        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1">Name</label>
-            <input type="number" class="form-control">
-        </div>    
+            <input asp-for="name" class="form-control">
+        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1">Price</label>
-            <input type="number" class="form-control">
-        </div>    
+            <input asp-for="price" type="number" class="form-control">
+        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1">Amount</label>
-            <input type="number" class="form-control">
+            <input asp-for="amout" type="number" class="form-control">
         </div>
+
         <div>
             <button type="submit" class="btn btn-outline-danger">Submit</button>
             <a class="btn btn-outline-danger" asp-action="Index">Back</a>
