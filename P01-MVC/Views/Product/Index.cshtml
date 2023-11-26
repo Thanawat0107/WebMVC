@@ -18,6 +18,12 @@
                 <th colspan="2">@product.name</th>
                 <td>@product.price</td>
                 <td>@product.amout</td>
+                <td>
+                    <a class="btn btn-outline-danger"asp-action="Edit" asp-route-id="@product.id">Edit</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@product.id"
+                    onclick="return confirm('ยืนยันการลบ!')">Delete</a>
+
+                </td>
             </tr>
         }
     </tbody>

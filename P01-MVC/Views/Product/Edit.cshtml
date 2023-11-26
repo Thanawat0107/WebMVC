@@ -1,14 +1,14 @@
 ﻿@model Product
 
-<p>Create Page</p>
+<p>update Page</p>
 
 <div class="container col-md-6">
-    <form asp-action="Create">
+    <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-banger"></div>
         <div class="mb-3">
 
             <label asp-for="id">ID</label>
-            <input asp-for="id" type="number" class="form-control">
+            <input asp-for="id" type="number" class="form-control" readonly>
             <span asp-validation-for="id" class="text-danger"></span>
         </div>
 

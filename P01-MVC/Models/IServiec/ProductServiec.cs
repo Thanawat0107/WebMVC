@@ -9,6 +9,7 @@ namespace P01_MVC.Models.IServiec
         public ProductServiec()
         {
             ProductList= new List<Product>();
+            GenerateProduct(20);
         }
 
         public void GenerateProduct(int number=10)
@@ -29,8 +30,6 @@ namespace P01_MVC.Models.IServiec
 
         public List<Product> GenerateProductAll()
         {
-            var ps = new ProductServiec();
-            ps.GenerateProduct();
             return ProductList;
         }
 
@@ -42,6 +41,24 @@ namespace P01_MVC.Models.IServiec
         public void AddProduct(Product product)
         {
             ProductList.Add(product);
+        }
+
+        public void DeleteProduct(int Id)
+        {
+            var result = SearchProduct(Id);
+
+            if (result != null) { ProductList.Remove(result); }
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            var oldProduct = ProductList.Find(p=>p.id == product.id);
+            var index = ProductList.IndexOf(oldProduct);
+            if (index != -1)
+            {
+                ProductList.RemoveAt(index);
+                ProductList.Insert(index, product);
+            }
         }
     }
 }

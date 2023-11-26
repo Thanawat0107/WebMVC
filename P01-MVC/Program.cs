@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //Dependemcy injectio
-builder.Services.AddSingleton<IProductServices,ProductServices>();
+builder.Services.AddSingleton<IProductServiec, ProductServiec>();
 
 //Midie Ware = бра
 var app = builder.Build();

@@ -15,7 +15,6 @@ namespace P01_MVC.Controllers
 
         public IActionResult Index()
         {
-            ps.GenerateProduct(20);
             return View(ps.GenerateProductAll());
         }
 
@@ -34,6 +33,32 @@ namespace P01_MVC.Controllers
             {
                 ps.AddProduct(product);
             }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int Id)
+        {
+            ps.DeleteProduct(Id);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int Id)
+        {
+            var result = ps.SearchProduct(Id);
+
+            if (result == null) return RedirectToAction("Index");
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (!ModelState.IsValid) { return View(); }
+
+            ps.UpdateProduct(product);
+
             return RedirectToAction("Index");
         }
     }

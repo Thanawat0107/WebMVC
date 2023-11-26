@@ -6,5 +6,7 @@
         List<Product> GenerateProductAll();
         Product SearchProduct(int Id);
         void AddProduct(Product product);
+        void DeleteProduct(int Id);
+        void UpdateProduct(Product product);
     }
 }
