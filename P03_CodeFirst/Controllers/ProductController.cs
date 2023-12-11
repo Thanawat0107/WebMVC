@@ -29,7 +29,12 @@ namespace P03_CodeFirst.Controllers
             {
                 ps.Delete(product);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");  
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
