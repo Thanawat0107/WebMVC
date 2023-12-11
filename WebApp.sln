@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P01-MVC", "P01-MVC\P01-MVC.csproj", "{FEA22B25-8D2A-4E4D-99B9-A2FE1117D863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P02_Dependency", "P02_Dependency\P02_Dependency.csproj", "{A056CDE7-E92C-436E-B34F-B647F0EE9FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P02_Dependency", "P02_Dependency\P02_Dependency.csproj", "{A056CDE7-E92C-436E-B34F-B647F0EE9FC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03_CodeFirst", "P03_CodeFirst\P03_CodeFirst.csproj", "{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{A056CDE7-E92C-436E-B34F-B647F0EE9FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A056CDE7-E92C-436E-B34F-B647F0EE9FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A056CDE7-E92C-436E-B34F-B647F0EE9FC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
