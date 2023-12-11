@@ -33,9 +33,9 @@
                 <td>@p.Name</td>
                 <td>@p.Price</td>
                 <td>@p.Amount</td>
-                <a class="btn btn-primary">Edit</a>
+                    <a class="btn btn-primary"asp-action="Updare"asp-route-id="@p.Id">Edit</a>
                 <a class="btn btn-danger" onclick="return confirm('Are you sure')"
-                       asp-action="Delete" asp-route-id="@p.Id">Delete</a>
+                       asp-action="Delete"asp-route-id="@p.Id">Delete</a>
             </tr>
             }
         </tbody>

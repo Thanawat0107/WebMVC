@@ -18,6 +18,12 @@ namespace P03_CodeFirst.Services
             if (_db.Products.Count() == 0 ) GenerateProduct();
         }
 
+        public void Add(Product product)
+        {
+            _db.Products.Add(product);
+            _db.SaveChanges();
+        }
+
         public void Delete(Product product)
         {
             _db.Products.Remove(product); //memory
@@ -44,7 +50,7 @@ namespace P03_CodeFirst.Services
         public IEnumerable<Product> GetAll()
         {
             var test= _db.Products.ToList();
-            return _db.Products.ToList();
+            return _db.Products.OrderByDescending(p => p.Id).ToList();
         }
 
         public Product GetById(int id)
@@ -52,6 +58,12 @@ namespace P03_CodeFirst.Services
             var product = _db.Products.Find(id);
 
             return product;
+        }
+
+        public void Update(Product product)
+        {
+            _db.Products.Update(product);
+            _db.SaveChanges();
         }
     }
 }

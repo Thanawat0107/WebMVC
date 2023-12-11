@@ -1,7 +1,11 @@
 ﻿@model Product
 
-<form asp-action="Create">
+<form asp-action="Edit">
     @* <div asp-validation-summary="All" class="text-danger"></div> *@
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label"></label>
+        <input class="form-control" asp-for="Id" disabled>
+    </div>
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input class="form-control" asp-for="Name">
