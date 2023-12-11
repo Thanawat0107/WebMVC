@@ -14,7 +14,7 @@ namespace P03_CodeFirst.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS; Database=TestXXX; Trusted_Connection=True; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS; Database=Test123; Trusted_Connection=True; TrustServerCertificate=True");
             //optionsBuilder.UseSqlite("Data Source=TestPSduct67.db");
         }
         public DbSet<Product> Products { get; set; }
