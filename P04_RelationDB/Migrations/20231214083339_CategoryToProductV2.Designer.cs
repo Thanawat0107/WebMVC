@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using P04_RelationDB.Data;
 
@@ -10,9 +11,11 @@ using P04_RelationDB.Data;
 namespace P04_RelationDB.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231214083339_CategoryToProductV2")]
+    partial class CategoryToProductV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +58,7 @@ namespace P04_RelationDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeatureID")
-                        .IsUnique();
+                    b.HasIndex("FeatureID");
 
                     b.ToTable("ComPonents");
                 });
@@ -68,6 +70,9 @@ namespace P04_RelationDB.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ComPonent")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -110,8 +115,8 @@ namespace P04_RelationDB.Migrations
             modelBuilder.Entity("P04_RelationDB.Models.ComPonent", b =>
                 {
                     b.HasOne("P04_RelationDB.Models.Feature", "Feature")
-                        .WithOne("ComPonent")
-                        .HasForeignKey("P04_RelationDB.Models.ComPonent", "FeatureID")
+                        .WithMany()
+                        .HasForeignKey("FeatureID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -127,12 +132,6 @@ namespace P04_RelationDB.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("P04_RelationDB.Models.Feature", b =>
-                {
-                    b.Navigation("ComPonent")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
