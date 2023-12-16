@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using P04_RelationDB.Data;
 
@@ -11,9 +12,11 @@ using P04_RelationDB.Data;
 namespace P04_RelationDB.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231216030638_AddProductDetailsV2")]
+    partial class AddProductDetailsV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,30 +163,7 @@ namespace P04_RelationDB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("P04_RelationDB.Models.ProductExtend", "ProductExtend", b1 =>
-                        {
-                            b1.Property<int>("ComPonentId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Color")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<double>("Weight")
-                                .HasColumnType("float");
-
-                            b1.HasKey("ComPonentId");
-
-                            b1.ToTable("ComPonents");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ComPonentId");
-                        });
-
                     b.Navigation("Feature");
-
-                    b.Navigation("ProductExtend")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("P04_RelationDB.Models.ComPonentProduct", b =>
@@ -213,30 +193,7 @@ namespace P04_RelationDB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("P04_RelationDB.Models.ProductExtend", "ProductExtend", b1 =>
-                        {
-                            b1.Property<int>("ProductId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Color")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<double>("Weight")
-                                .HasColumnType("float");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Products");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
                     b.Navigation("Category");
-
-                    b.Navigation("ProductExtend")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("P04_RelationDB.Models.ProductDetails", b =>

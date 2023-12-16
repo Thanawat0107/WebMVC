@@ -8,6 +8,7 @@ namespace P04_RelationDB.Models
         public string Name { get; set; }
         public string Price { get; set; }
         public int Amount { get; set; }
+        public ProductExtend ProductExtend { get; set; }
 
         public int CategoryID { get; set; } //คีย์นอกที่เชื่อมที่ไปยังไฟล์ Category
         //[ForeignKey("TestID")]
