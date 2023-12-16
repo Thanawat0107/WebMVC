@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P02_Dependency", "P02_Depen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P03_CodeFirst", "P03_CodeFirst\P03_CodeFirst.csproj", "{BF4845B8-0F61-45DD-85E4-BEF03CAF8977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P04_RelationDB", "P04_RelationDB\P04_RelationDB.csproj", "{14131D13-8045-44F3-A2C6-681AD70DE07D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P04_RelationDB", "P04_RelationDB\P04_RelationDB.csproj", "{14131D13-8045-44F3-A2C6-681AD70DE07D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P05_UploadFile", "P05_UploadFile\P05_UploadFile.csproj", "{24F26B85-652E-456F-B219-13DEB13A7100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{14131D13-8045-44F3-A2C6-681AD70DE07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14131D13-8045-44F3-A2C6-681AD70DE07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14131D13-8045-44F3-A2C6-681AD70DE07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F26B85-652E-456F-B219-13DEB13A7100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F26B85-652E-456F-B219-13DEB13A7100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F26B85-652E-456F-B219-13DEB13A7100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F26B85-652E-456F-B219-13DEB13A7100}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
