@@ -7,7 +7,6 @@ namespace P03_CodeFirst.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
