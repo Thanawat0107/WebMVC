@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P04_RelationDB", "P04_Relat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P05_UploadFile", "P05_UploadFile\P05_UploadFile.csproj", "{24F26B85-652E-456F-B219-13DEB13A7100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P06_Authen", "P06_Authen\P06_Authen.csproj", "{EAB0A718-C960-455F-8796-EF8F5A85ACAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P06_Authen", "P06_Authen\P06_Authen.csproj", "{EAB0A718-C960-455F-8796-EF8F5A85ACAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P07_AuthenDB", "P07_AuthenDB\P07_AuthenDB.csproj", "{B035FA8D-6D8C-49A1-96AA-873FD81F404B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{EAB0A718-C960-455F-8796-EF8F5A85ACAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAB0A718-C960-455F-8796-EF8F5A85ACAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAB0A718-C960-455F-8796-EF8F5A85ACAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B035FA8D-6D8C-49A1-96AA-873FD81F404B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B035FA8D-6D8C-49A1-96AA-873FD81F404B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B035FA8D-6D8C-49A1-96AA-873FD81F404B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B035FA8D-6D8C-49A1-96AA-873FD81F404B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
