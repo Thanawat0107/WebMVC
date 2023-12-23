@@ -104,18 +104,22 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            //ใส่ properties
+            //ใส่ properties เพิ่มเข้ามาเอง
             #region MyFind
             [Required]
             public string Role {  get; set; }
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+            #endregion
         }
 
-        #region MyRegion ใส่เพิ่มเข้ามาเอง
+
+
         public async Task OnGetAsync(string returnUrl = null)
         {
+            #region MyRegion 
+
             if (User.Identity.IsAuthenticated) Response.Redirect("/");
 
             //ตัวเลือกบทบาทแบบรายการ อ่านมาจากฐานข้อมูล
@@ -131,6 +135,7 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
+        #endregion
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
