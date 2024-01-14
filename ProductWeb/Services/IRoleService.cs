@@ -1,6 +1,6 @@
-﻿using WebApp.Models;
+﻿using ProductWeb.Models;
 
-namespace WebApp.Services
+namespace ProductWeb.Services
 {
     public interface IRoleService
     {

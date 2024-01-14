@@ -1,4 +1,4 @@
-﻿namespace WebApp.Models
+﻿namespace ProductWeb.Models
 {
     public class RoleDto
     {

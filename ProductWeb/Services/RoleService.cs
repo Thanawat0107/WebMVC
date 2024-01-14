@@ -1,14 +1,14 @@
-﻿using WebApp.Models;
+﻿using ProductWeb.Models;
 
-namespace WebApp.Services
+namespace ProductWeb.Services
 {
     public class RoleService : IRoleService
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
 
-        public RoleService(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RoleService(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -72,7 +72,7 @@ namespace WebApp.Services
 
         public async Task<bool> Update(RoleUpdateDto roleUpdateDto)
         {
-            var identityRole = await Find(roleUpdateDto.UpdateName);
+            var identityRole = await Find(roleUpdateDto.Name);
 
 
             if (identityRole == null) return false;

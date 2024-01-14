@@ -2,26 +2,32 @@ global using ProductWeb.Models;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using ProductWeb.Data;
-using WebApp.Services;
+global using ProductWeb.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ProductContext>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ProductContext>();
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ProductContext>();
 
-builder.Services.AddDefaultIdentity<User>(options =>
+#region MyToken เพื่อเรียกใช้บริการโทเคนและบทบาทของผู้ใช้
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireDigit = false;
-}).AddRoles<IdentityRole>().AddEntityFrameworkStores<ProductContext>();
+}).AddDefaultTokenProviders()
+.AddEntityFrameworkStores<ProductContext>();
+#endregion
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,4 +49,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapRazorPages();
 app.Run();
