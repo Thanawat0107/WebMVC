@@ -15,32 +15,27 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using P08_Authorization.Areas.Identity.Data;
 
-namespace P08_Authorization.Areas.Identity.Pages.Account
+namespace ProductWeb.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<MyUser> _signInManager;
-        private readonly UserManager<MyUser> _userManager;
-        private readonly IUserStore<MyUser> _userStore;
-        private readonly IUserEmailStore<MyUser> _emailStore;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
-            UserManager<MyUser> userManager,
-            IUserStore<MyUser> userStore,
-            SignInManager<MyUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IUserStore<IdentityUser> userStore,
+            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -48,7 +43,6 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -103,37 +97,14 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
-            //ใส่ properties เพิ่มเข้ามาเอง
-            #region MyFind
-            [Required]
-            public string Role {  get; set; }
-
-            [ValidateNever]
-            public IEnumerable<SelectListItem> RoleList { get; set; }
-            #endregion
         }
+
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            #region MyRegion 
-
-            if (User.Identity.IsAuthenticated) Response.Redirect("/");
-
-            //ตัวเลือกบทบาทแบบรายการ อ่านมาจากฐานข้อมูล
-            Input = new InputModel
-            {
-                RoleList = _roleManager.Roles.Select(x => x.Name).Select(name => new SelectListItem
-                {
-                    Text = name,
-                    Value = name
-                })
-            };
-
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-        #endregion
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -150,12 +121,6 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    #region MyRole กำหนดเพิ่มบทบาทให้กับผู้
-
-                    await _userManager.AddToRoleAsync(user, Input.Role);
-
-                    #endregion
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -189,27 +154,27 @@ namespace P08_Authorization.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private MyUser CreateUser()
+        private IdentityUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<MyUser>();
+                return Activator.CreateInstance<IdentityUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(MyUser)}'. " +
-                    $"Ensure that '{nameof(MyUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<MyUser> GetEmailStore()
+        private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<MyUser>)_userStore;
+            return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
 }
