@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductWeb.ViewModels;
 
@@ -7,10 +8,12 @@ namespace ProductWeb.Controllers
     public class ProductController : Controller
     {
         private readonly ProductContext _ps;
+        private readonly IWebHostEnvironment _ws;
 
-        public ProductController(ProductContext ps)
+        public ProductController(ProductContext ps, IWebHostEnvironment ws)
         {
             _ps = ps;
+            _ws = ws;
         }
 
         public IActionResult Index()
@@ -23,7 +26,12 @@ namespace ProductWeb.Controllers
         {
             var productVM = new ProductVM()
             {
-                Product = new(),
+                Product = new()
+                { 
+                    Name = "test",
+                    Description = "test",
+                    Price = 1,
+                },
                 CategoryList = _ps.Categories.Select(item => new SelectListItem
                 {
                     Text = item.Name,
@@ -44,6 +52,42 @@ namespace ProductWeb.Controllers
         [HttpPost]
         public IActionResult CreateOfUpdate(ProductVM productVM)
         {
+            if (!ModelState.IsValid) return View(productVM);
+
+            #region การจัดการรูปภาพ
+            string wwwRootPath = _ws.WebRootPath;
+            var file = productVM.file;
+            if (file != null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var extension = Path.GetExtension(file.FileName);
+                var uploads = wwwRootPath + SD.ProductPath; //wwwroot\images\product
+
+                if (!Directory.Exists(uploads))
+                    Directory.CreateDirectory(uploads);
+
+                //กรณีมีรูปภาพเดิมตอ้งลบทิ้งก่อน
+                if (productVM.Product.ImageUrl != null)
+                {
+                    //wwwroot\images\product\test.jpg;
+                    var oldImagePath = Path.Combine(uploads,productVM.Product.ImageUrl);
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                //บันทึกรุปภาพใหม่
+                using (var fileStreams = new FileStream(Path.Combine(uploads,fileName + extension), FileMode.Create))
+                {
+                    file.CopyTo(fileStreams);
+                }
+
+                productVM.Product.ImageUrl = fileName + extension;
+            }
+            #endregion การจัดการรูปภาพ
+
             var id = productVM.Product.Id;
             if (id != 0)
             {
@@ -58,6 +102,8 @@ namespace ProductWeb.Controllers
 
             }
             _ps.SaveChanges();
+
+
             return RedirectToAction(nameof(Index));
         }
 

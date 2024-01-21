@@ -9,5 +9,8 @@
         public const string StatusPending = "Pending";
         public const string StatusApproved = "Approved";
         public const string StatusCancelled = "Cancelled";
+
+        public const string ImagePath = @"\Images";
+        public const string ProductPath = ImagePath + @"\products";
     }
 }
