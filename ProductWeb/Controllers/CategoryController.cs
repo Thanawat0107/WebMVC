@@ -54,10 +54,20 @@ namespace ProductWeb.Controllers
         public IActionResult Delete (int id)
         {
             var category = _cs.Categories.Find(id);
+            if (category != null)
+            {
+                var product = _cs.Products.Where(p => p.CategoryId == id).FirstOrDefault();
+                if (product != null)
+                {
+                    TempData["success"] = "มีการใช้งานอยู่";
+                    return RedirectToAction(nameof(Index));
+                }
 
-            if (category != null) _cs.Categories.Remove(category);
-            _cs.SaveChanges();
-            TempData["success"] = "ลบเรียบร้อยหายไปปล้วว";
+                _cs.Categories.Remove(category);
+                _cs.SaveChanges();
+                TempData["success"] = "ลบเรียบร้อยหายไปปล้วว";
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }
