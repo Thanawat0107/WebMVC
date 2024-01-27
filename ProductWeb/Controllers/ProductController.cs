@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ProductWeb.Data;
 using ProductWeb.ViewModels;
 
 namespace ProductWeb.Controllers
@@ -19,6 +20,14 @@ namespace ProductWeb.Controllers
         public IActionResult Index()
         {
             var product = _ps.Products.Include(p=>p.Category).ToList();
+
+            foreach (var item in product)
+            {
+                if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    item.ImageUrl = SD.ProductPath + "\\" + item.ImageUrl;
+                }
+            }
             return View(product);
         }
 
@@ -67,7 +76,7 @@ namespace ProductWeb.Controllers
                     Directory.CreateDirectory(uploads);
 
                 //กรณีมีรูปภาพเดิมตอ้งลบทิ้งก่อน
-                if (productVM.Product.ImageUrl != null)
+                if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                 {
                     //wwwroot\images\product\test.jpg;
                     var oldImagePath = Path.Combine(uploads,productVM.Product.ImageUrl);
@@ -92,7 +101,7 @@ namespace ProductWeb.Controllers
             if (id != 0)
             {
                 //update
-                _ps.Update(productVM.Product.Id);
+                _ps.Update(productVM.Product);
 
             }
             else
@@ -108,12 +117,21 @@ namespace ProductWeb.Controllers
         }
 
         public IActionResult Delete(int id) {
-            var product = _ps.Products.Find(id);
+        var product = _ps.Products.Find(id);
 
             if (product == null)
             {
                 TempData["success"] = "ลบเรียบร้อยหายไปแล้วว";
                 return RedirectToAction(nameof(Index));
+            }
+
+            if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                var oldImagePath = _ws.WebRootPath + SD.ProductPath + "\\" + product.ImageUrl;
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
             }
 
             _ps.Remove(product);
